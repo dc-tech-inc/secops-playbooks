@@ -12,7 +12,19 @@ from pathlib import Path
 
 import dpkt
 
-DNS_TYPES = {1: "A", 2: "NS", 5: "CNAME", 6: "SOA", 12: "PTR", 15: "MX", 16: "TXT", 28: "AAAA", 29: "LOC", 33: "SRV", 255: "ANY"}
+DNS_TYPES = {
+    1: "A",
+    2: "NS",
+    5: "CNAME",
+    6: "SOA",
+    12: "PTR",
+    15: "MX",
+    16: "TXT",
+    28: "AAAA",
+    29: "LOC",
+    33: "SRV",
+    255: "ANY",
+}
 
 
 def _ip(raw: bytes) -> str:

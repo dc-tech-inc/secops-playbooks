@@ -12,8 +12,8 @@ import pytest
 import yaml
 from sigma.backends.sqlite import sqliteBackend
 from sigma.collection import SigmaCollection
-from sigma.validators.core import validators
 from sigma.validation import SigmaValidator
+from sigma.validators.core import validators
 
 ROOT = Path(__file__).resolve().parents[1] / "sigma"
 RULE_FILES = sorted((ROOT / "rules").glob("*.yml"))
@@ -38,6 +38,7 @@ def _matches(rule_path: Path) -> set[str]:
     hits: set[str] = set()
     for query in sqliteBackend().convert(collection):
         hits |= {row[columns.index("id")] for row in db.execute(query)}
+    db.close()
     return hits
 
 

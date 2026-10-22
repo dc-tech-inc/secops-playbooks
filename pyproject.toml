@@ -33,5 +33,9 @@ extend-include = ["*.ipynb"]
 select = ["E", "F", "W", "I", "B", "UP", "S", "PT"]
 ignore = ["S101"]  # assert is how pytest tests are written
 
+[tool.ruff.lint.isort]
+known-first-party = ["policy_check", "pcaplib", "fetch_samples", "patterns", "runbook_lint"]
+
 [tool.ruff.lint.per-file-ignores]
 "pcap-notebooks/fetch_samples.py" = ["S310"]  # URLs come from the pinned, https-only manifest
+"detection/tests/test_sigma.py" = ["S608"]  # column names come from the committed fixture, not user input
