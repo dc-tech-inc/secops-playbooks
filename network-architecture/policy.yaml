@@ -1,0 +1,154 @@
+# Zone-based firewall policy for a FICTIONAL three-site company ("Example Co.").
+# Nothing here is a real network: addresses are RFC 1918 (internal) and RFC 5737
+# (documentation) ranges, and names use example.com. The tests in tests/ enforce
+# the invariants described in README.md.
+
+organization: Example Co. (fictional)
+default_action: drop
+
+zones:
+  - name: mgmt
+    description: Network devices, controller, out-of-band admin
+  - name: corp
+    description: Staff laptops and desktops
+  - name: servers
+    description: On-prem services (file, print, directory)
+  - name: voip
+    description: Desk phones
+  - name: iot
+    description: Cameras, door controllers, sensors
+  - name: guest
+    description: Visitor Wi-Fi, internet only
+  - name: vpn
+    description: Site-to-site tunnels between sites
+  - name: wan
+    description: Internet
+
+sites:
+  - name: hq
+    wan_address: 203.0.113.10      # RFC 5737 placeholder
+    vlans:
+      - { id: 10, name: mgmt,    zone: mgmt,    cidr: 10.10.10.0/24 }
+      - { id: 20, name: corp,    zone: corp,    cidr: 10.10.20.0/23 }
+      - { id: 30, name: servers, zone: servers, cidr: 10.10.30.0/24 }
+      - { id: 40, name: voip,    zone: voip,    cidr: 10.10.40.0/24 }
+      - { id: 50, name: iot,     zone: iot,     cidr: 10.10.50.0/24 }
+      - { id: 90, name: guest,   zone: guest,   cidr: 10.10.90.0/24 }
+  - name: branch-a
+    wan_address: 198.51.100.20     # RFC 5737 placeholder
+    vlans:
+      - { id: 10, name: mgmt,  zone: mgmt,  cidr: 10.20.10.0/24 }
+      - { id: 20, name: corp,  zone: corp,  cidr: 10.20.20.0/24 }
+      - { id: 40, name: voip,  zone: voip,  cidr: 10.20.40.0/24 }
+      - { id: 90, name: guest, zone: guest, cidr: 10.20.90.0/24 }
+  - name: branch-b
+    wan_address: 192.0.2.30        # RFC 5737 placeholder
+    vlans:
+      - { id: 10, name: mgmt,  zone: mgmt,  cidr: 10.30.10.0/24 }
+      - { id: 20, name: corp,  zone: corp,  cidr: 10.30.20.0/24 }
+      - { id: 50, name: iot,   zone: iot,   cidr: 10.30.50.0/24 }
+      - { id: 90, name: guest, zone: guest, cidr: 10.30.90.0/24 }
+
+services:
+  dns:    { proto: udp, ports: [53] }
+  ntp:    { proto: udp, ports: [123] }
+  web:    { proto: tcp, ports: [80, 443] }
+  smb:    { proto: tcp, ports: [445] }
+  ldaps:  { proto: tcp, ports: [636] }
+  kerberos: { proto: tcp, ports: [88] }
+  print:  { proto: tcp, ports: [631, 9100] }
+  sip:    { proto: udp, ports: [5060] }
+  rtp:    { proto: udp, ports: ["10000-20000"] }
+  ssh:    { proto: tcp, ports: [22] }
+  https-admin: { proto: tcp, ports: [443, 8443] }
+  wireguard: { proto: udp, ports: [51820] }
+  rtsp:   { proto: tcp, ports: [554] }
+
+# Rules are evaluated top to bottom; anything not matched hits default_action.
+# Every rule needs a reason: undocumented rules are rejected by the tests.
+rules:
+  - id: R010
+    from: corp
+    to: wan
+    services: [dns, web, ntp]
+    action: allow
+    reason: Staff internet access through the gateway's DNS and web filter.
+  - id: R020
+    from: corp
+    to: servers
+    services: [smb, ldaps, kerberos, print, dns]
+    action: allow
+    reason: Staff use file, print and directory services.
+  - id: R030
+    from: corp
+    to: vpn
+    services: [smb, print, dns]
+    action: allow
+    reason: Branch staff reach HQ file and print services over the site-to-site tunnel.
+  - id: R040
+    from: vpn
+    to: servers
+    services: [smb, ldaps, kerberos, print, dns]
+    action: allow
+    reason: Traffic arriving from branch corp VLANs over the tunnel.
+  - id: R050
+    from: voip
+    to: wan
+    services: [sip, rtp, ntp, dns]
+    action: allow
+    reason: Phones register with the hosted PBX provider only.
+  - id: R060
+    from: iot
+    to: servers
+    services: [rtsp, ntp]
+    action: allow
+    reason: Cameras stream to the recorder in the servers zone; no internet for IoT.
+  - id: R070
+    from: guest
+    to: wan
+    services: [dns, web]
+    action: allow
+    reason: Visitors get internet only, with client isolation on the SSID.
+  - id: R080
+    from: mgmt
+    to: wan
+    services: [dns, ntp, web]
+    action: allow
+    reason: Controller and devices fetch firmware and time.
+  - id: R090
+    from: corp
+    to: mgmt
+    services: [https-admin, ssh]
+    action: allow
+    source_group: it-admins
+    reason: Only the IT admin device group may manage network gear.
+  - id: R100
+    from: wan
+    to: vpn
+    services: [wireguard]
+    action: allow
+    source_group: site-peers
+    reason: Tunnel endpoints accept handshakes only from the other sites' WAN addresses.
+  - id: R900
+    from: guest
+    to: [corp, servers, mgmt, voip, iot, vpn]
+    services: [any]
+    action: drop
+    log: true
+    reason: Explicit, logged deny so guest probing shows up in the gateway logs.
+  - id: R910
+    from: iot
+    to: [wan, corp, mgmt]
+    services: [any]
+    action: drop
+    log: true
+    reason: IoT devices never talk to the internet or staff networks.
+
+source_groups:
+  it-admins:
+    - 10.10.20.10/32
+    - 10.10.20.11/32
+  site-peers:
+    - 203.0.113.10/32
+    - 198.51.100.20/32
+    - 192.0.2.30/32
