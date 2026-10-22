@@ -7,7 +7,7 @@ description: |
   payloads, but admins and some management agents use them too: triage the parent process.
 references:
   - https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_pwsh
-author: DC TECH INC
+author: DCtech.
 date: 2026-10-22
 tags:
   - attack.execution

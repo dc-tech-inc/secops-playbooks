@@ -7,7 +7,7 @@ description: |
   and the AV alert within minutes. The file is harmless by design.
 references:
   - https://www.eicar.org/download-anti-malware-testfile/
-author: DC TECH INC
+author: DCtech.
 date: 2026-10-22
 logsource:
   category: file_event

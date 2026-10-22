@@ -6,7 +6,7 @@
 rule ExampleCo_Canary_Document
 {
     meta:
-        author = "DC TECH INC"
+        author = "DCtech."
         description = "Decoy document marker EXCO-CANARY-<16 hex> in text or UTF-16 form"
         date = "2026-10-22"
 

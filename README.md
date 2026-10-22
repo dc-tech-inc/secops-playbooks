@@ -4,9 +4,9 @@
 ![codeql](https://github.com/dc-tech-inc/secops-playbooks/actions/workflows/codeql.yml/badge.svg)
 ![license](https://img.shields.io/badge/license-MIT-blue.svg)
 
-Defensive security operations reference by **DC TECH INC**: incident response runbooks with a tabletop exercise, GitHub Advanced Security configuration, Azure Front Door WAF and Defender for Cloud as code, network-forensics notebooks on public captures, Sigma/YARA detections, a documented multi-site firewall design and a PowerShell triage module. Every part has an automated check in CI.
+Defensive security operations reference by **DCtech.**: incident response runbooks with a tabletop exercise, GitHub Advanced Security configuration, Azure Front Door WAF and Defender for Cloud as code, network-forensics notebooks on public captures, Sigma/YARA detections, a documented multi-site firewall design and a PowerShell triage module. Every part has an automated check in CI.
 
-> **Defensive only, synthetic data only.** No malware, no exploits, no offensive tooling. The organization in the examples ("Example Co.") is fictional, addresses are RFC 1918 / RFC 5737 and domains are `example.com`. Malware detection is tested with the EICAR test string and benign files; packet analysis uses public Wireshark sample captures that are downloaded and sha256-verified, not redistributed. Nothing here contains DC TECH or client incident data, and nothing has been deployed to a real environment.
+> **Defensive only, synthetic data only.** No malware, no exploits, no offensive tooling. The organization in the examples ("Example Co.") is fictional, addresses are RFC 1918 / RFC 5737 and domains are `example.com`. Malware detection is tested with the EICAR test string and benign files; packet analysis uses public Wireshark sample captures that are downloaded and sha256-verified, not redistributed. Nothing here contains DCtech. or client incident data, and nothing has been deployed to a real environment.
 
 ## The problem
 
@@ -96,7 +96,7 @@ Tracked as issues: Sigma rules for Linux and cloud audit logs, a per-user (distr
 
 ## Resumo (PT-BR)
 
-Referência de operações de segurança **defensiva** da DC TECH INC: runbooks de resposta a incidentes com exercício tabletop, GitHub Advanced Security como código, WAF do Azure Front Door e Defender for Cloud em Terraform e Bicep, notebooks de análise de PCAPs públicos, regras Sigma/YARA testadas só com EICAR e dados sintéticos, arquitetura multi-site fictícia de firewall e um módulo PowerShell de triagem. Tudo validado no CI; nada foi implantado em ambiente real.
+Referência de operações de segurança **defensiva** da DCtech.: runbooks de resposta a incidentes com exercício tabletop, GitHub Advanced Security como código, WAF do Azure Front Door e Defender for Cloud em Terraform e Bicep, notebooks de análise de PCAPs públicos, regras Sigma/YARA testadas só com EICAR e dados sintéticos, arquitetura multi-site fictícia de firewall e um módulo PowerShell de triagem. Tudo validado no CI; nada foi implantado em ambiente real.
 
 ## References
 
