@@ -86,7 +86,7 @@ Rows are sources, columns are destinations. Default is **drop**; cells list what
 
 - **Zones over per-VLAN rules.** Rules are written between zones, so adding a VLAN to a zone inherits its policy. This is the model UniFi's zone-based firewall uses, and it keeps the rule count small.
 - **Explicit logged denies** for guest and IoT (R900, R910) even though the default is drop: these are the zones where probing is most likely, and a logged deny is what an analyst searches for.
-- **Client isolation** on the guest SSID and **no inter-VLAN routing for IoT** except the camera-to-recorder path.
+- Client isolation on the guest SSID and no inter-VLAN routing for IoT, except the camera-to-recorder path.
 - **Management plane** sits on its own VLAN; admin access comes from two named devices, not from the whole corp VLAN.
 
 ## Limitations

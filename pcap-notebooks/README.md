@@ -1,6 +1,6 @@
 # PCAP notebooks: network forensics on public captures
 
-Three Jupyter notebooks that triage **public** sample captures from the [Wireshark wiki](https://wiki.wireshark.org/SampleCaptures). No capture from DCtech. or any client is used, and the samples are not redistributed here: [`fetch_samples.py`](fetch_samples.py) downloads them on demand into `data/` (git-ignored) and refuses any file whose sha256 differs from [`samples.json`](samples.json).
+Three Jupyter notebooks that triage public sample captures from the [Wireshark wiki](https://wiki.wireshark.org/SampleCaptures). No capture from DCtech. or any client is used, and the samples are not redistributed here: [`fetch_samples.py`](fetch_samples.py) downloads them on demand into `data/` (git-ignored) and refuses any file whose sha256 differs from [`samples.json`](samples.json).
 
 | Notebook | Capture | Question |
 |---|---|---|

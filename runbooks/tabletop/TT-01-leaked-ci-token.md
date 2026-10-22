@@ -1,6 +1,6 @@
 # TT-01 · Tabletop exercise: leaked CI token
 
-A 60–90 minute discussion exercise for the engineering and IT staff of the fictional Example Co. Nobody touches a real system. The facilitator reads each inject, the team answers the questions, and the scribe records decisions and gaps. Format based on the CISA Tabletop Exercise Packages.
+A 60-90 minute discussion exercise for the engineering and IT staff of the fictional Example Co. Nobody touches a real system. The facilitator reads each inject, the team answers the questions, and the scribe records decisions and gaps. Format based on the CISA Tabletop Exercise Packages.
 
 ## Objectives
 

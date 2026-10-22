@@ -2,7 +2,7 @@
 
 | Folder | What | How it is tested |
 |---|---|---|
-| [`sigma/rules`](sigma/rules) | 3 Sigma rules: PowerShell `-EncodedCommand`, certutil download, EICAR test file written | [`tests/test_sigma.py`](tests/test_sigma.py) runs the pySigma validators, converts each rule to SQL with the official SQLite backend and checks it matches **exactly** the expected events in [`sigma/tests/events.yml`](sigma/tests/events.yml) |
+| [`sigma/rules`](sigma/rules) | 3 Sigma rules: PowerShell `-EncodedCommand`, certutil download, EICAR test file written | [`tests/test_sigma.py`](tests/test_sigma.py) runs the pySigma validators, converts each rule to SQL with the official SQLite backend and checks it matches exactly the expected events in [`sigma/tests/events.yml`](sigma/tests/events.yml) |
 | [`yara/rules`](yara/rules) | EICAR test file, and a canary-document marker for the fictional Example Co. | [`tests/test_yara.py`](tests/test_yara.py) compiles the rules with yara-python, matches the EICAR string (built in memory, never on disk), checks near-misses and benign files |
 
 ```bash
