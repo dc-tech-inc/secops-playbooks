@@ -4,7 +4,7 @@ How DCtech. turns on and configures GitHub's security features for a repository,
 
 | Feature | File | What it does |
 |---|---|---|
-| Code scanning (CodeQL) | [`../.github/workflows/codeql.yml`](../.github/workflows/codeql.yml), [`codeql/codeql-config.yml`](codeql/codeql-config.yml) | Advanced setup for Python and GitHub Actions workflows, `security-extended` queries, weekly schedule |
+| Code scanning (CodeQL) | Repository setting: CodeQL **default setup** (no workflow file in this repo), languages Python and GitHub Actions | GitHub runs the analysis; the advanced `codeql.yml` was removed because it conflicts with the default setup |
 | Dependabot version updates | [`../.github/dependabot.yml`](../.github/dependabot.yml) (this repo), [`dependabot/dependabot.template.yml`](dependabot/dependabot.template.yml) (template with grouping) | Weekly update PRs for actions, pip and Terraform |
 | Dependabot alerts + security updates, secret scanning, push protection, private vulnerability reporting | [`enable-security-features.sh`](enable-security-features.sh) | `gh api` calls; dry run by default, `--apply` to change settings |
 | Custom secret scanning patterns | [`secret-scanning/custom_patterns.yml`](secret-scanning/custom_patterns.yml) | Three patterns for the fictional Example Co. token formats, tested with generated tokens |
@@ -18,7 +18,7 @@ pytest github-advanced-security/tests
 ## Plan availability (why some of this is off right now)
 
 - On **public** repositories, CodeQL code scanning, secret scanning and push protection are free.
-- On **private** repositories they need GitHub Code Security / Secret Protection, which a Free organization does not have. This repository is private until it is published, so [`codeql.yml`](../.github/workflows/codeql.yml) skips its job with `if: github.event.repository.visibility == 'public'` instead of failing, and the enablement script is run after publication.
+- On **private** repositories they need GitHub Code Security / Secret Protection, which a Free organization does not have. This repository is private until it is published; CodeQL runs through the default setup once the repository is public.
 - Dependabot alerts and version updates work on private repositories on every plan.
 - Until then, every push is covered by **gitleaks** in CI (pinned release, sha256-verified download), which scans the full git history.
 

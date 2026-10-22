@@ -1,8 +1,0 @@
-# CodeQL configuration used by .github/workflows/codeql.yml.
-# security-extended adds lower-precision security queries on top of the default suite.
-name: secops-playbooks codeql config
-queries:
-  - uses: security-extended
-paths-ignore:
-  - pcap-notebooks/data
-  - "**/tests/**"

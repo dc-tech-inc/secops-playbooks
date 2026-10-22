@@ -1,7 +1,6 @@
 # secops-playbooks
 
 ![ci](https://github.com/dc-tech-inc/secops-playbooks/actions/workflows/ci.yml/badge.svg)
-![codeql](https://github.com/dc-tech-inc/secops-playbooks/actions/workflows/codeql.yml/badge.svg)
 ![license](https://img.shields.io/badge/license-MIT-blue.svg)
 
 Defensive security operations reference by **DCtech.**: incident response runbooks with a tabletop exercise, GitHub Advanced Security configuration, Azure Front Door WAF and Defender for Cloud as code, network-forensics notebooks on public captures, Sigma/YARA detections, a documented multi-site firewall design and a PowerShell triage module. Every part has an automated check in CI.
