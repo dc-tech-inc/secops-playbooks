@@ -1,6 +1,6 @@
 # Azure Front Door WAF and Defender for Cloud as code
 
-The same edge-security baseline written twice, in **Terraform** ([`terraform/`](terraform)) and **Bicep** ([`bicep/`](bicep)), for teams that standardize on either.
+The same edge-security baseline written twice, in Terraform ([`terraform/`](terraform)) and Bicep ([`bicep/`](bicep)), for teams that standardize on either.
 
 > **Never deployed.** No Azure subscription, credential or real domain is used. The origin is `app.example.com` and the alert contact is `security@example.com`. CI proves the code is well-formed and that the defaults are the safe ones; it cannot prove behaviour in a real subscription. Standard Defender plans and Front Door Premium are billed services.
 

@@ -4,7 +4,7 @@ This repository contains defensive reference material only: runbooks, detection 
 
 ## Reporting a vulnerability
 
-Please use GitHub's private vulnerability reporting ("Security" tab, "Report a vulnerability") instead of a public issue. We aim to acknowledge reports within a few business days.
+Use GitHub's private vulnerability reporting ("Security" tab, "Report a vulnerability") instead of a public issue. We aim to acknowledge reports within a few business days.
 
 Useful reports include a detection rule that can be trivially bypassed, an unsafe default in the Terraform or Bicep, a runbook step that would destroy evidence, or a CI workflow that could leak secrets.
 
