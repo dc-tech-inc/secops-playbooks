@@ -1,0 +1,30 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+# Bicep build output
+azure-as-code/bicep/*.json
+!azure-as-code/bicep/bicepconfig.json
+# Secrets / local env
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+# Downloaded public PCAP samples (fetched and sha256-verified on demand)
+pcap-notebooks/data/
+# Python / tooling
+__pycache__/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+.ipynb_checkpoints/
+.bin/
+# Editors
+.vscode/
+.idea/
