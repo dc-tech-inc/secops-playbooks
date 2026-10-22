@@ -1,0 +1,61 @@
+# Synthetic, benign test events for the Sigma rules. Every "positive" command here is
+# harmless: the encoded PowerShell decodes to Write-Output "hello from a drill", the
+# certutil URL points at example.com, and the EICAR file is the industry test string.
+# Hosts and users are fictional.
+
+process_creation:
+  - id: pc-01
+    Image: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'
+    CommandLine: 'powershell.exe -NoProfile -EncodedCommand VwByAGkAdABlAC0ATwB1AHQAcAB1AHQAIAAiAGgAZQBsAGwAbwAgAGYAcgBvAG0AIABhACAAZAByAGkAbABsACIA'
+    ParentImage: 'C:\Windows\explorer.exe'
+    User: 'EXAMPLE\analyst1'
+  - id: pc-02
+    Image: 'C:\Program Files\PowerShell\7\pwsh.exe'
+    CommandLine: 'pwsh -enc VwByAGkAdABlAC0ATwB1AHQAcAB1AHQAIAAiAGgAZQBsAGwAbwAgAGYAcgBvAG0AIABhACAAZAByAGkAbABsACIA'
+    ParentImage: 'C:\Windows\System32\cmd.exe'
+    User: 'EXAMPLE\analyst1'
+  - id: pc-03
+    Image: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'
+    CommandLine: 'powershell.exe -NoProfile -File C:\Scripts\Get-DiskReport.ps1'
+    ParentImage: 'C:\Windows\System32\svchost.exe'
+    User: 'EXAMPLE\svc-reports'
+  - id: pc-04
+    Image: 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'
+    CommandLine: 'powershell.exe Get-Help about_Encoding'
+    ParentImage: 'C:\Windows\explorer.exe'
+    User: 'EXAMPLE\analyst1'
+  - id: pc-05
+    Image: 'C:\Windows\System32\certutil.exe'
+    CommandLine: 'certutil.exe -urlcache -split -f https://downloads.example.com/tool.txt C:\Temp\tool.txt'
+    ParentImage: 'C:\Windows\System32\cmd.exe'
+    User: 'EXAMPLE\analyst1'
+  - id: pc-06
+    Image: 'C:\Windows\System32\certutil.exe'
+    CommandLine: 'certutil.exe -hashfile C:\Temp\report.pdf SHA256'
+    ParentImage: 'C:\Windows\System32\cmd.exe'
+    User: 'EXAMPLE\analyst1'
+  - id: pc-07
+    Image: 'C:\Windows\System32\notepad.exe'
+    CommandLine: 'notepad.exe C:\Temp\certutil -urlcache notes https://example.com.txt'
+    ParentImage: 'C:\Windows\explorer.exe'
+    User: 'EXAMPLE\analyst1'
+
+file_event:
+  - id: fe-01
+    TargetFilename: 'C:\Users\analyst1\Downloads\eicar.com'
+    Image: 'C:\Program Files\Microsoft Edge\msedge.exe'
+  - id: fe-02
+    TargetFilename: 'C:\Drills\eicar_com.zip'
+    Image: 'C:\Windows\explorer.exe'
+  - id: fe-03
+    TargetFilename: 'C:\Users\analyst1\Documents\quarterly-report.docx'
+    Image: 'C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE'
+  - id: fe-04
+    TargetFilename: 'C:\Users\analyst1\Documents\eicar-notes.docx'
+    Image: 'C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE'
+
+# Rule ID -> event IDs it must match. Everything else in the same category must NOT match.
+expected:
+  4dee8c0d-46b2-498e-8691-e2e25ffb3053: [pc-01, pc-02]
+  3b12f770-2aef-45ff-8379-3d60b7841a58: [pc-05]
+  8b39c3a7-c789-4ce4-8b32-2f429f735116: [fe-01, fe-02]
