@@ -6,7 +6,7 @@ description: |
   fetch files that bypasses a browser. Legitimate use exists but is rare on workstations.
 references:
   - https://learn.microsoft.com/windows-server/administration/windows-commands/certutil
-author: DC TECH INC
+author: DCtech.
 date: 2026-10-22
 tags:
   - attack.command-and-control

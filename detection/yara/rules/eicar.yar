@@ -7,7 +7,7 @@
 rule EICAR_Test_File
 {
     meta:
-        author = "DC TECH INC"
+        author = "DCtech."
         description = "EICAR standard anti-virus test file (68-byte string at offset 0)"
         reference = "https://www.eicar.org/download-anti-malware-testfile/"
         date = "2026-10-22"

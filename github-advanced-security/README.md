@@ -1,6 +1,6 @@
 # GitHub Advanced Security as code
 
-How DC TECH INC turns on and configures GitHub's security features for a repository, kept as files so the setup is reviewable and repeatable.
+How DCtech. turns on and configures GitHub's security features for a repository, kept as files so the setup is reviewable and repeatable.
 
 | Feature | File | What it does |
 |---|---|---|

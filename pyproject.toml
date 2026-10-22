@@ -1,7 +1,7 @@
 [project]
 name = "secops-playbooks"
 version = "0.1.0"
-description = "Defensive security operations reference by DC TECH INC"
+description = "Defensive security operations reference by DCtech."
 requires-python = ">=3.11"
 license = "MIT"
 
