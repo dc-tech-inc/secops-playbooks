@@ -1,0 +1,21 @@
+{
+  "source": "https://wiki.wireshark.org/SampleCaptures",
+  "note": "Public sample captures from the Wireshark wiki. They are downloaded on demand and verified against these sha256 values; they are not redistributed in this repository.",
+  "samples": {
+    "dns.cap": {
+      "url": "https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/dns.cap",
+      "sha256": "041eeb6f98bb398f1ee8b09651b5b5a84f6a62639f95bf226f9e7b77355d9f28",
+      "description": "Assorted DNS queries and responses"
+    },
+    "http_gzip.cap": {
+      "url": "https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/http_gzip.cap",
+      "sha256": "79e0ae3b23c0de4289b4cb73901091ac0b744dc417532a84dcd3fb882eaec12e",
+      "description": "One HTTP request with a gzip-encoded response"
+    },
+    "arp-storm.pcap": {
+      "url": "https://wiki.wireshark.org/uploads/__moin_import__/attachments/SampleCaptures/arp-storm.pcap",
+      "sha256": "dc101ea9bfda59f56b54bfb949195c3f169032c045b47f98e6952a86933c1b8d",
+      "description": "Burst of ARP requests from one host"
+    }
+  }
+}
