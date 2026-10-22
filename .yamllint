@@ -1,0 +1,19 @@
+extends: default
+rules:
+  line-length:
+    max: 160
+  document-start: disable
+  truthy:
+    allowed-values: ["true", "false", "on"]
+  comments:
+    min-spaces-from-content: 1
+  braces:
+    max-spaces-inside: 1
+  # Column alignment in policy.yaml is intentional, for reviewability.
+  commas:
+    max-spaces-after: -1
+  colons:
+    max-spaces-after: -1
+ignore: |
+  .venv/
+  pcap-notebooks/data/

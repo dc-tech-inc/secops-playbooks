@@ -1,0 +1,25 @@
+title: EICAR Anti-Malware Test File Written to Disk
+id: 8b39c3a7-c789-4ce4-8b32-2f429f735116
+status: test
+description: |
+  Detects a file whose name marks it as the EICAR test file. Used to prove the
+  endpoint-to-SIEM pipeline end to end during drills: drop EICAR, expect this alert
+  and the AV alert within minutes. The file is harmless by design.
+references:
+  - https://www.eicar.org/download-anti-malware-testfile/
+author: DC TECH INC
+date: 2026-10-22
+logsource:
+  category: file_event
+  product: windows
+detection:
+  selection:
+    TargetFilename|contains: 'eicar'
+    TargetFilename|endswith:
+      - '.com'
+      - '.txt'
+      - '.zip'
+  condition: selection
+falsepositives:
+  - Scheduled detection drills (expected; tag them in the drill log)
+level: low

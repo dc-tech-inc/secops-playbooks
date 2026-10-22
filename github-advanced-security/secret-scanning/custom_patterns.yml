@@ -1,0 +1,27 @@
+# Custom secret scanning patterns for the FICTIONAL organization "Example Co.".
+# Fields mirror the GitHub UI for custom patterns (secret format, before/after secret,
+# additional "must not match" requirements), so each entry can be pasted into
+# Settings -> Code security -> Secret scanning -> Custom patterns.
+# GitHub uses Hyperscan syntax; these regexes stay inside the subset Python's `re`
+# also understands, so tests/test_custom_patterns.py can exercise them.
+
+defaults:
+  before_secret: '\A|[^0-9A-Za-z]'
+  after_secret: '\z|[^0-9A-Za-z]'
+
+patterns:
+  - name: Example Co. portal API key
+    secret_format: 'exco_(?:live|test)_[A-Za-z0-9]{32}'
+    must_not_match:
+      - '^exco_test_0{32}$'          # documented placeholder in the SDK docs
+    severity: high
+
+  - name: Example Co. webhook signing secret
+    secret_format: 'whsec_exco_[a-f0-9]{40}'
+    severity: high
+
+  - name: Example Co. internal database URL with password
+    secret_format: 'postgres(?:ql)?://[A-Za-z0-9_]+:[^@\s/]{8,}@[a-z0-9.-]+\.internal\.example\.com'
+    must_not_match:
+      - ':(?:changeme|password|example)[^@]*@'
+    severity: critical

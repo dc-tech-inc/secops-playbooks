@@ -1,0 +1,41 @@
+[project]
+name = "secops-playbooks"
+version = "0.1.0"
+description = "Defensive security operations reference by DC TECH INC"
+requires-python = ">=3.11"
+license = "MIT"
+
+[tool.pytest.ini_options]
+pythonpath = ["network-architecture", "pcap-notebooks", "github-advanced-security/secret-scanning", "runbooks"]
+testpaths = [
+    "network-architecture/tests",
+    "pcap-notebooks/tests",
+    "detection/tests",
+    "github-advanced-security/tests",
+    "runbooks/tests",
+]
+addopts = "--import-mode=importlib"
+
+[tool.coverage.run]
+source = ["network-architecture", "pcap-notebooks", "github-advanced-security", "runbooks"]
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 85
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S", "PT"]
+ignore = ["S101"]  # assert is how pytest tests are written
+
+[tool.ruff.lint.isort]
+known-first-party = ["policy_check", "pcaplib", "fetch_samples", "patterns", "runbook_lint"]
+
+[tool.ruff.lint.per-file-ignores]
+"pcap-notebooks/fetch_samples.py" = ["S310"]  # URLs come from the pinned, https-only manifest
+"detection/tests/test_sigma.py" = ["S608"]  # column names come from the committed fixture, not user input

@@ -5,6 +5,7 @@
 *.tfvars
 !*.tfvars.example
 crash.log
+.terraform.lock.hcl
 # Bicep build output
 azure-as-code/bicep/*.json
 !azure-as-code/bicep/bicepconfig.json

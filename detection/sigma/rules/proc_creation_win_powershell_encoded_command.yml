@@ -1,0 +1,33 @@
+title: PowerShell Started With an Encoded Command
+id: 4dee8c0d-46b2-498e-8691-e2e25ffb3053
+status: test
+description: |
+  Detects powershell.exe or pwsh.exe launched with -EncodedCommand (or a short form of it).
+  Encoded commands hide the script text from casual review and are common in phishing
+  payloads, but admins and some management agents use them too: triage the parent process.
+references:
+  - https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_pwsh
+author: DC TECH INC
+date: 2026-10-22
+tags:
+  - attack.execution
+  - attack.t1059.001
+  - attack.t1027
+logsource:
+  category: process_creation
+  product: windows
+detection:
+  selection_img:
+    Image|endswith:
+      - '\powershell.exe'
+      - '\pwsh.exe'
+  selection_flag:
+    CommandLine|contains:
+      - ' -enc '
+      - ' -ec '
+      - ' -encodedcommand '
+      - ' -e JAB'
+  condition: selection_img and selection_flag
+falsepositives:
+  - Configuration management agents that wrap scripts in -EncodedCommand
+level: medium

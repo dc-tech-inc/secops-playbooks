@@ -1,0 +1,13 @@
+framework:
+  - terraform
+  - bicep
+directory:
+  - azure-as-code/terraform
+  - azure-as-code/bicep
+skip-path:
+  - azure-as-code/bicep/tests
+quiet: true
+compact: true
+# Skips are added only for findings checkov actually reports, each with a reason
+# in the "Accepted scanner findings" section of README.md.
+skip-check: []
