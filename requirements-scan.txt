@@ -1,0 +1,4 @@
+# Infrastructure and config scanners used by CI.
+checkov>=3.2,<4
+check-jsonschema>=0.29,<1
+yamllint>=1.35,<2
