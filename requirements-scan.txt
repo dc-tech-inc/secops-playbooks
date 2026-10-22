@@ -1,4 +1,2 @@
-# Infrastructure and config scanners used by CI.
+# Infrastructure-as-code scanner (kept separate: its pins conflict with the test stack).
 checkov>=3.2,<4
-check-jsonschema>=0.29,<1
-yamllint>=1.35,<2
